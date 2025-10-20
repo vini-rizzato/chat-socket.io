@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const login = async (req, res, next) => {
+const login = async (req, res, next) => {
     try{
         const {email, senha} = req.body;
 
@@ -22,9 +22,7 @@ export const login = async (req, res, next) => {
         const token = jwt.sign({ id: findUser.id, email: email }, process.env.JWT_KEY);
 
         res.status(201).json({ token: token });
-    }catch(err){
-        res.status(500).json({ error: "Erro do servidor."});
-    }
+    }catch(err){}
 };
 
 export default login;

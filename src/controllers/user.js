@@ -1,11 +1,7 @@
 import express from "express";
 
-const userController =  express.Router();
+const user = (req, res) => {
 
-userController.get("/client/troca-senha/:id", (req, res) => {
-    const { senha } = req.body;
+}
 
-    
-});
-
-export default userController;
+export default user;

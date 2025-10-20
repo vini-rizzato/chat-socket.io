@@ -5,10 +5,10 @@ const schemaUser = new mongoose.Schema({
     email: String,
     senha: String,
     contatos: {
-        email: String
+        id: String
     },
     chats: {
-        id: Number
+        id: String
     }
 }, {collection: "users"});
 

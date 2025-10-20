@@ -1,12 +1,5 @@
-import express from "express";
+import User from "../models/user.js";
 
-const contactController = express.Router();
-
-contactController.get("/user/contact", (req, res) => {
-    res.send("Contatos.");
-});
-
-contactController.post("/user/contact", (req, res) => {
+export const contact = async (req, res, next) => {
     
-});
-
+};

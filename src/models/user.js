@@ -6,6 +6,9 @@ const schemaUser = new mongoose.Schema({
     senha: String,
     contatos: {
         email: String
+    },
+    chats: {
+        id: Number
     }
 }, {collection: "users"});
 

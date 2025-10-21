@@ -1,13 +1,15 @@
 import express from "express";
 import connect from "./src/config/connection.js";
-import Router from "./src/routes/index.js";
+import routerRegister from "./src/routes/routerRegister.js";
 import { errorHandler } from "./src/middlewares/errorHandler.js";
+import loginRouter from "./src/routes/routerLogin.js";
 
 const app = express();
 app.use(express.json());
 connect;
 
-app.use("/", Router);
+app.use("/register", routerRegister);
+app.use("/login", loginRouter);
 app.use(errorHandler);
 
 app.listen(8080, () => {

@@ -7,4 +7,5 @@ export async function findUserContact(req, res, next){
     if(!contact){
         return res.status(409).json({ error: "E-mail de usuário não encontrado." });
     };
+    next();
 }

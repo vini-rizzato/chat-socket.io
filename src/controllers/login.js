@@ -16,7 +16,7 @@ const login = async (req, res, next) => {
         if(!compareSenha){
             return res.status(400).json({ error: "Senha inválida para esse usuário." });
         }
-        const token = jwt.sign({ id: findUser.id, email: email }, process.env.JWT_KEY);
+        const token = jwt.sign({ id: findUser.id, email: email }, process.env.JWT_KEY, { expiresIn: '1h' });
 
         res.status(201).json({ token: token });
     }catch(err){}

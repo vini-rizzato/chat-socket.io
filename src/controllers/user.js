@@ -1,6 +1,4 @@
-import express from "express";
-
-const user = (req, res) => {
+const user = async (req, res) => {
 
 }
 

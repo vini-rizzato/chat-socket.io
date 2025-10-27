@@ -1,11 +1,19 @@
 import User from "../../models/user.js";
 
-export async function findUserLogin(req, res, next){
-    const {email} = req.body;
+export const findUserLogin = async (req, res, next) => {
+  try {
+    const { email } = req.body;
 
-    const findUser = await User.findOne({email});
-    if(!findUser){
-        return res.status(409).json({ error: "Usuário não encontrado." });
-    };
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(409).json({ message: "Usuário não encontrado." });
+    }
+
+    req.user = user;
     next();
-}
+  } catch (error) {
+    console.error("Erro em findUserLogin:", error);
+    return res.status(500).json({ message: "Erro ao buscar usuário." });
+  }
+};

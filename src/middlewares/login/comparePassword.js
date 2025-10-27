@@ -1,10 +1,19 @@
-export async function comparePassword(req, res, next){
-    const {senha} = req.body;
+import bcrypt from "bcrypt";
 
-    const compareSenha = await bcrypt.compare(senha, findUser.senha);
+export const comparePassword = async (req, res, next) => {
+  try {
+    const { senha } = req.body;
+    const user = req.user;
 
-    if(!compareSenha){
-        return res.status(400).json({ error: "Senha inválida para esse usuário." });
-    };
+    const senhaValida = await bcrypt.compare(senha, user.senha);
+
+    if (!senhaValida) {
+      return res.status(401).json({ message: "Senha incorreta." });
+    }
+
     next();
-}
+  } catch (error) {
+    console.error("Erro em comparePassword:", error);
+    return res.status(500).json({ message: "Erro ao comparar senha." });
+  }
+};

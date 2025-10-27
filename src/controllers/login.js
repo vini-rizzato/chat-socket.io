@@ -1,23 +1,29 @@
-import User from "../models/user.js";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const login = async (req, res, next) => {
-    try{
-        const {email} = req.body;
+const login = async (req, res) => {
+  try {
+    const user = req.user;
 
-        const findUser = await User.findOne({ email });
-
-        const token = jwt.sign({ id: findUser.id, email: email }, process.env.JWT_KEY, { expiresIn: '1h' });
-        console.log(token);
-
-        res.status(200).json({ token: token });
-    }catch(err){
-        next();
+    if (!user) {
+      return res.status(500).json({ message: "Usuário não encontrado no request." });
     }
+
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_KEY,
+      { expiresIn: "1h" }
+    );
+
+    console.log("Token gerado com sucesso:", token);
+
+    return res.status(200).json({ token });
+  } catch (err) {
+    console.error("Erro ao gerar token:", err);
+    return res.status(500).json({ message: "Erro ao realizar login." });
+  }
 };
 
 export default login;

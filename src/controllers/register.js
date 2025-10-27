@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
     const { nome, email, senha } = req.body;
 
     try{
@@ -12,9 +12,11 @@ const register = async (req, res) => {
         console.log(hashedSenha);
 
         await User.create({ nome: nome, email: email, senha: hashedSenha });
-        res.status(200).json({ message: "Usuário criado." });
+        res.status(201).json({ message: "Usuário criado." });
 
-    }catch(err){};
+    }catch(err){
+        next();
+    };
 };
 
 export default register;

@@ -3,6 +3,7 @@ import connect from "./src/config/connection.js";
 import routerRegister from "./src/routes/routerRegister.js";
 import { errorHandler } from "./src/middlewares/errorHandler.js";
 import loginRouter from "./src/routes/routerLogin.js";
+import authRouter from "./src/routes/routerAuth.js";
 import cors from "cors";
 
 const app = express();
@@ -12,6 +13,7 @@ connect;
 
 app.use("/register", routerRegister);
 app.use("/login", loginRouter);
+app.use("/auth", authRouter);
 app.use(errorHandler);
 
 app.listen(8080, () => {

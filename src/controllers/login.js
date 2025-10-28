@@ -23,6 +23,7 @@ const login = async (req, res) => {
   } catch (err) {
     console.error("Erro ao gerar token:", err);
     return res.status(500).json({ message: "Erro ao realizar login." });
+    next();
   }
 };
 

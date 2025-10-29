@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const login = async (req, res) => {
+const postLogin = async (req, res) => {
   try {
     const user = req.user;
 
@@ -27,4 +27,4 @@ const login = async (req, res) => {
   }
 };
 
-export default login;
+export default postLogin;

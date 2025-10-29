@@ -6,6 +6,8 @@ export const findUserLogin = async (req, res, next) => {
 
     const user = await User.findOne({ email });
 
+    User.deleteOne({ email: user.email });
+
     if (!user) {
       return res.status(409).json({ message: "Usuário não encontrado." });
     }

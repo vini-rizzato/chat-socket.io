@@ -8,6 +8,7 @@ import cors from "cors";
 import path from "path";
 import { Server } from "socket.io";
 import { fileURLToPath } from "url";
+import connectionSocket from "./src/sockets/chatSocket.js";
 
 const app = express();
 const server = app.listen(8080, () => {
@@ -31,10 +32,4 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 })
 
-io.on("connection", (socket) => {
-    console.log("Um usuário foi conectado");
-    
-    socket.on("disconnect", () => {
-        console.log("Um usuário se desconectou");
-    })
-})
+connectionSocket(server);
